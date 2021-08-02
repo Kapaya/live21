@@ -1,20 +1,30 @@
-\documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
-\usepackage{graphicx}
-\usepackage{textcomp}
-\usepackage{xcolor}
-\usepackage[sort, numbers]{natbib}
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%%
+%% This is file `sample-sigconf.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `sigconf')
+%%
+%% IMPORTANT NOTICE:
+%%
+%% For the copyright see the source file.
+%%
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigconf.tex.
+%%
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%%
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% The first command in your LaTeX source must be the \documentclass command.
+\documentclass[sigconf,10pt]{acmart}
 
-% Make font size smaller in bibliography, as per:
-% https://tex.stackexchange.com/questions/386709/proper-usage-of-biblatex-ieee-biblatex-style-in-an-ieeetran-document
-\renewcommand*{\bibfont}{\footnotesize}
-
-% begin pandoc tex stuff
+\settopmatter{printfolios=true}
 
 \usepackage{hyperref}
 
@@ -22,72 +32,139 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% end pandoc tex stuff
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
 
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+\pagenumbering{gobble}
+%%
+%% end of the preamble, start of the body of the document source.
 \begin{document}
 
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
 \title{Joker: A Unified Interaction Model For Web Customization}
 
-% removing authors for anonymous submission
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
 
-% \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
-% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-% \textit{name of organization (of Aff.)}\\
-% City, Country \\
-% email address or ORCID}
-% \and
-% \IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
-% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-% \textit{name of organization (of Aff.)}\\
-% City, Country \\
-% email address or ORCID}
-% \and
-% \IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
-% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-% \textit{name of organization (of Aff.)}\\
-% City, Country \\
-% email address or ORCID}
-% \and
-% \IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
-% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-% \textit{name of organization (of Aff.)}\\
-% City, Country \\
-% email address or ORCID}}
+%\author{Kapaya Katongo}
+%\affiliation{%
+%  \institution{MIT CSAIL}
+%  \city{Cambridge, MA}
+%  \country{USA}
+%}
+%\email{kkatongo@mit.edu}
 
+%\author{Geoffrey Litt}
+%\affiliation{%
+%  \institution{MIT CSAIL}
+%  \city{Cambridge, MA}
+%  \country{USA}
+%}
+%\email{glitt@mit.edu}
+
+%\author{Kathryn Jin}
+%\affiliation{%
+%  \institution{MIT CSAIL}
+%  \city{Cambridge, MA}
+%  \country{USA}
+%}
+%\email{kjin@mit.edu}
+
+%\author{Daniel Jackson}
+%\affiliation{%
+% \institution{MIT CSAIL}
+%  \city{Cambridge, MA}
+%  \country{USA}
+%}
+%\email{dnj@csail.mit.edu}
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+% \renewcommand{\shortauthors}{Trovato and Tobin, et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+%% \begin{abstract}
+%%  
+%% \end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+%% From HERE
+%%\begin{CCSXML}
+%%<ccs2012>
+%%<concept>
+%%<concept_id>10011007.10011006.10011066.10011069</concept_id>
+%%<concept_desc>Software and its engineering~Integrated and visual development environments</concept_desc>
+%%<concept_significance>500</concept_significance>
+%%</concept>
+%%</ccs2012>
+%%\end{CCSXML}
+
+%% \ccsdesc[500]{Software and its engineering~Integrated and visual development environments}
+% To HERE
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+%% \keywords{end-user programming, software customization, web scraping, programming-by-example, program synthesis}
+
+%% A "teaser" image appears between the author and affiliation
+%% information and the body of the document, and typically spans the
+%% page.
+% \begin{teaserfigure}
+%  \includegraphics[width=\textwidth]{sampleteaser}
+%  \caption{Seattle Mariners at Spring Training, 2010.}
+%  \Description{Enjoying the baseball game from the third-base
+%  seats. Ichiro Suzuki preparing to bat.}
+%  \label{fig:teaser}
+%\end{teaserfigure}
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
 \maketitle
-
-\begin{abstract}
-Tools that enable end-users to customize websites typically use a
-two-stage workflow: first, users extract data into a structured form;
-second, they use that extracted data to augment the original website in
-some way. This two-stage workflow poses a usability barrier because it
-requires users to make upfront decisions about what data to extract,
-rather than allowing them to incrementally extract data as they augment
-it.
-
-In this paper, we present a new, unified interaction model for web
-customization that encompasses both extraction and augmentation. The key
-idea is to provide users with a spreadsheet-like formula language that
-can be used for both data extraction and augmentation. We also provide a
-programming-by-demonstration (PBD) interface that allows users to create
-data extraction formulas by clicking on elements in the website. This
-model allows users to naturally and iteratively move between extraction
-and augmentation.
-
-To illustrate our unified interaction model, we have implemented a tool
-called Joker which is an extension of Wildcard, a prior web
-customization system. Through case studies, we show that Joker can be
-used to customize many real-world websites. We also present a formative
-user study with five participants, which showed that people with a wide
-range of technical backgrounds can use Joker to customize websites, and
-also revealed some interesting limitations of our approach. Finally, we
-present a heuristic evaluation of our design using the Cognitive
-Dimensions framework.
-\end{abstract}
-
-\begin{IEEEkeywords}
-end-user web customization, programming-by-demonstration, spreadsheets, end-user web scraping, program synthesis
-\end{IEEEkeywords}
 
 \hypertarget{sec:introduction}{%
 \section{Introduction}\label{sec:introduction}}
@@ -173,23 +250,14 @@ Section~\ref{sec:examples} describes a concrete scenario, showing how
 Joker enables a user to complete a useful customization task. In
 Section~\ref{sec:implementation}, we outline the implementation of our
 formula language and user interface, as well as the algorithms used by
-our PBD interface.
-
-We have performed three evaluations of our approach, presented in
-Section~\ref{sec:evaluation}. First, we describe a suite of case studies
-in which we used Joker to extract and augment a variety of websites in
-order to characterize its capabilities and limitations. Second, we
-describe a formative user study with five participants, which showed
-that users were generally able to use Joker to perform useful extraction
-and augmentation tasks, but which also uncovered limitations,
-particularly for less experienced users trying to extract data from more
-complex websites. Finally, we perform a heuristic evaluation of our
-design, using the Cognitive Dimensions \citep{blackwell2001} framework.
-
-Joker relates to existing work not only in end-user web customization,
-but also in end-user web scraping and program synthesis, which we
-discuss in Section~\ref{sec:related-work}. Finally, we discuss
-opportunities for future work in Section~\ref{sec:conclusion}.
+our PBD interface. We evaluate our approach in
+Section~\ref{sec:evaluation} by describing a suite of case studies in
+which we used Joker to extract and augment a variety of websites in
+order to characterize its capabilities and limitations. Joker relates to
+existing work not only in end-user web customization, but also in
+end-user web scraping and program synthesis, which we discuss in
+Section~\ref{sec:related-work}. Finally, we discuss opportunities for
+future work in Section~\ref{sec:conclusion}.
 
 \hypertarget{sec:examples}{%
 \section{Example Usage Scenario}\label{sec:examples}}
@@ -311,10 +379,9 @@ Section~\ref{sec:evaluation}.
 \end{figure*}
 
 In this section, we describe Joker's formula language in more detail.
-Then, we outline the \emph{wrapper induction} \citep{kushmerick2000}
-algorithm that Joker's PBD interface uses to synthesize the row element
-and column selectors presented in formulas. Figure~\ref{fig:overview}
-illustrates the entire process.
+Then, we briefly outline the \emph{wrapper induction}
+\citep{kushmerick2000} algorithm that Joker's PBD interface uses to
+synthesize the row element and column selectors presented in formulas.
 
 \hypertarget{extraction-formulas}{%
 \subsection{Extraction Formulas}\label{extraction-formulas}}
@@ -391,125 +458,19 @@ can lead to very complex queries. In our work, we chose to prioritize
 the readability of queries by less sophisticated users, so that users
 can more easily author queries and repair them when they break. We
 implemented a set of heuristics inspired by Vegemite \citep{lin2009} for
-wrapper induction, described below.
-
-\hypertarget{determining-row-elements}{%
-\subsubsection{Determining Row
-Elements}\label{determining-row-elements}}
-
-The user starts by demonstrating an element \(v\), representing a value
-that should be in the table. From that demonstration, we must find a set
-of \emph{row elements} that represent the rows of the table. We could
-naively assume that \(parent(v)\) is the row containing \(v\), but often
-\(v\) is deeply nested inside its containing row; we must determine
-which ancestor of \(v\) is likely to be the row.
-
-Intuitively, we solve this problem by assuming that all rows share some
-similar internal structure. In particular, we expect most rows to
-contain a value for the demonstrated column. (If there were no missing
-data, we'd expect \emph{all} rows to contain data for this column.)
-
-Formally: assume a function \(select(el, s)\) which runs a CSS selector
-that returns the set of elements matching \(s\) within \(el\). We
-generate a set of plausible candidates \(P\), consisting of pairs of a
-row element and a CSS selector:
-
-\(P = \{ (r, s) \mid r \in ancestors(v) \land select(r, s) = \{v\} \}\)
-
-For each candidate \((r, s) \in P\), we compute a weight function \(w\),
-which is based on the number of siblings of \(r\) that have ``similar
-structure'', defined by checking whether running \(s\) within the
-sibling also returns a unique element.
-
-\(w(r, s) = |\{ r' \mid r' \in siblings(r) \land |select(r', s) | = 1 \}|\)
-
-We then choose the candidate with the highest weight. In case of ties,
-the candidate closer to \(v\) in the tree (i.e., lower in the tree)
-wins. Given a winning candidate \((r, s)\), the full set of row elements
-is \(\{r\} \cup siblings(r)\).
-
-\hypertarget{synthesizing-css-selectors-for-column-values}{%
-\subsubsection{Synthesizing CSS Selectors For Column
-Values}\label{synthesizing-css-selectors-for-column-values}}
-
-Once we have determined the row elements, next we must choose a CSS
-selector that will be used to identify the demonstrated value within its
-row.
-
-Given a demonstrated value \(v\) within a row element \(r\), we generate
-two kinds of plausible selectors:
-
-\begin{itemize}
-\tightlist
-\item
-  selectors using CSS classes, which are manual annotations on DOM
-  elements added by the website's programmers, typically for styling
-  purposes (e.g.~"item\_\_price")
-\item
-  selectors using positional indexes within the tree, using the
-  \texttt{nth-child} CSS selector (e.g.~\texttt{nth-child(2)},
-  representing the second child of an element)
-\end{itemize}
-
-The minimum criteria for a plausible selector \(s\) is that it uniquely
-identifies the value within the row: \(select(r, s) = \{v\}\). But there
-may be many plausible selectors, so we must pick a best one.
-
-We first prioritize selectors using classes, because they tend to be
-more robust to changes on the website. A single selector can combine
-multiple classes, but we prefer using fewer classes when possible. If no
-plausible class-based selector can be generated (for example, if the
-relevant elements don't have any classes to query), we fall back to
-using a positional index selector. This kind of selector can always be
-generated regardless of the contents of the page, but tends to be less
-accurate and robust.
+wrapper induction, illustrated in Figure~\ref{fig:overview}.
 
 \hypertarget{sec:evaluation}{%
 \section{Evaluation}\label{sec:evaluation}}
 
-We evaluate our interaction model and tool in terms of three research
-questions:
-
-\emph{RQ1: What kinds of websites can this model operate effectively
-on?} We evaluate this with a suite of case studies that demonstrate its
-capabilities and limitations.
-
-\emph{RQ2: How are users of different backgrounds able to use the
-system?} We evaluate this with a small formative user study.
-
-\emph{RQ3: What are the essential design dimensions that distinguish
-this model from other approaches?} We evaluate this with a heuristic
-analysis using the Cognitive Dimensions of Notation framework
-\citep{blackwell2001}.
-
-\hypertarget{case-studies}{%
-\subsection{Case Studies}\label{case-studies}}
-
-Our first evaluation describes the results of the authors using Joker to
-extract data and perform customizations on popular websites. For the
-websites on which Joker can be used, we provide the sequence of
-interactions needed to achieve the customizations; for the websites on
-which Joker fails, we explain the relevant limitations.
+We evaluate our interaction model and tool by describing the results of
+our use of Joker to extract data and perform customizations on popular
+websites. For the websites on which Joker can be used, we provide the
+sequence of interactions needed to achieve the customizations; for the
+websites on which Joker fails, we explain the relevant limitations.
 
 \hypertarget{successful-applications}{%
-\subsubsection{Successful Applications}\label{successful-applications}}
-
-\begin{table*}[]
-\centering
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Website}              & \textbf{Example Customization Achieved by Joker}                                        \\ \hline
-eBay, Amazon            & Filter listings by whether they have a "Sponsored" label.                        \\
-Amazon, Target & Sort search results by price and rating.                                                \\
-Google Scholar                & Filter publications for those whose title contains a user-provided keyword. \\
-Reddit, CNN, ABC  & Sort by the read times of articles. Filter already-visited articles.         \\
-Weather.com                   & Filter hourly weather to find sunny times of day.                                        \\
-Github                        & Sort a user's code repositories by stars to find popular work.                          \\
-Postmates, Uber Eats    & Sort restaurants by delivery time and delivery fee.                                     \\ \hline
-\end{tabular}
-\vspace{8pt}
-\caption{Examples of websites that Joker can be used to customize, including extraction and augmentation}
-\end{table*}
+\subsection{Successful Applications}\label{successful-applications}}
 
 We have used Joker to achieve a variety of customizations across many
 websites. Table 1 summarizes examples we have found on popular websites.
@@ -537,7 +498,7 @@ Joker to filter the titles of a researcher's publications on their
 Google Scholar profile which is not natively supported. First, a user
 can extract the titles into a column (\texttt{A}) by demonstration.
 Then, the user can write the formula \texttt{Includes(A,\ "compiler")}
-that returns whether or not the title contains the keyword ``compiler''.
+that returns whether or not the title contains the keyword ``compiler.''
 Finally, the user can sort by this column to get all of the publications
 that fit their constraint at the top of the page. We have also used
 Joker to filter other text-based directory web pages such as Google
@@ -560,7 +521,7 @@ time of posting and sort by these values. We have performed similar
 customizations on websites such as ABC News and CNN.
 
 \hypertarget{limitations}{%
-\subsubsection{Limitations}\label{limitations}}
+\subsection{Limitations}\label{limitations}}
 
 Joker is most effective on websites whose data is presented as a
 collection of similarly-structured HTML elements. Certain websites,
@@ -590,199 +551,25 @@ however, have designs that make it difficult for Joker to extract data:
   DOM increases.
 \end{itemize}
 
-\hypertarget{user-study}{%
-\subsection{User Study}\label{user-study}}
-
-We conducted a small formative user study to understand how people would
-interact with Joker.
-
-\hypertarget{participants}{%
-\subsubsection{Participants}\label{participants}}
-
-We recruited 5 participants with varying backgrounds. 3 participants
-were familiar with spreadsheet formulas. 3 participants had extensive
-web development experience, 1 had a small amount of prior web
-development experience, and 1 had no web development experience. 3
-participants had previously extracted data from websites.
-
-\hypertarget{protocol}{%
-\subsubsection{Protocol}\label{protocol}}
-
-The participants completed 7 web customization tasks across 2 websites.
-All participants attempted all the tasks.
-
-First, we asked participants to customize a website with a relatively
-simple HTML structure: the MIT EECS course catalog website. All data
-\emph{extraction} on this site can be performed with demonstrations
-alone in Joker, although augmentation still requires writing formulas.
-The specific tasks were the following: 1a) Extract course titles, 1b)
-Extract course prerequisites, 1c) Add a column that indicates whether a
-course has a prerequisite \& 1d) Add a column that indicates whether a
-course has no prerequisites and is offered in the fall term.
-
-Next, we asked participants to customize a website with a more complex
-HTML structure: the search results page for the eBay shopping website.
-Due to the website's complexity, demonstrations alone are not sufficient
-to extract data; users must also directly edit extraction formulas. The
-specific tasks were the following: 2a) Extract title from listings of
-Apple iPhones for sale, 2b) Extract the listing price for the phone, \&
-2c) Create a column that indicates whether a listing for a phone is
-sponsored.
-
-Each session was 60 minutes long and conducted over a recorded video
-conference. We started each session with a description of Joker and
-provided a brief tutorial of its main features on a sample website not
-used in the tasks. There was no time limit for completing the tasks.
-Users were encouraged to speak aloud as they worked.
-
-Because some of the tasks build on results of previous tasks, we wanted
-to ensure all participants made enough progress to gather useful
-feedback. Therefore, whenever a participant got stuck for several
-minutes, we recorded why they were stuck and then offered hints on how
-to proceed (such as suggestions to read formula documentation or open
-the browser dev tools). While all participants were able to complete all
-tasks with hints, this obviously does not mean they could have completed
-the task unassisted. Our goal was not to simply measure whether users
-completed the task, but rather to gain qualitative insight into the
-barriers they faced.
-
-\hypertarget{results}{%
-\subsubsection{Results}\label{results}}
-
-\emph{Unified interaction model.} Most participants took advantage of
-the unified interaction model to interleave extraction and augmentation
-tasks, rather than performing all extraction up front. For example, on
-task 1, most participants extracted the prerequisites by demonstration,
-added one or more columns to the table to perform some string operations
-on the prerequisites, and then continued on to extract more information
-from the web page by demonstration. Furthermore, we hypothesize that in
-a less controlled setting, users would be even more likely to interleave
-extraction and augmentation, since the task may be less well defined at
-the beginning.
-
-One usability issue with the unified model was that participants
-sometimes got confused about how their demonstrations would affect the
-contents of the table. For example, multiple participants intended to
-add a new column by demonstrating an extraction, but instead
-accidentally overwrote the contents of an existing column. This poses a
-design challenge because the user's demonstrations occur in the website,
-so they cannot directly interact with the table while demonstrating;
-this suggests that the interface needs to do a better job indicating
-where the results of a demonstration will be inserted.
-
-\emph{Extracting simple data.} On the relatively simple MIT course
-catalog website, all participants were able to extract the relevant data
-from the page within seconds, simply performing demonstrations with a
-few clicks. This suggests that when Joker's generalization algorithm
-works well, it can be an effective tool for data extraction, even for
-users with limited programming experience. P1 said: \emph{``you could
-hover and {[}the data{]} was already selected\ldots that was very
-nice''}. P3, upon seeing the tutorial for extraction by demonstration,
-said \emph{``that's like black magic.''}
-
-\emph{Extracting complex data.} On the more complex eBay website where
-demonstration alone was not sufficient, results were more varied. P1,
-who had no prior web development experience, struggled to complete the
-task, saying that \emph{``looking at HTML is a bit much''}; this
-suggests that more work could be done to make the experience usable for
-novices. However, users with more web development experience were able
-to use the tool to perform complex extractions, such as directly writing
-CSS selectors into the formula bar. P2 and P3 both reported that Joker's
-live feedback loop was easier to use and faster than other approaches to
-web extraction; P3 noted that \emph{``{[}with any other approach{]}, it
-would have been slower to specify and slower to validate that I
-specified it correctly.''}
-
-It was challenging for some participants to switch between using the
-browser's developer tools and the Joker interface when doing complex
-extraction tasks. While we chose not to build HTML inspection into the
-Joker UI because the browser already provides a very rich set of tools,
-users sometimes were not able to tell how elements in the Joker table
-corresponded to elements in the browser's element inspector.
-
-\emph{Writing formulas.} In general, participants were able to learn the
-formula language by using an autocomplete dropdown with inline
-documentation, which we developed as part of the Joker extension. In
-some cases, participants were able to immediately construct correct
-formulas on the first try; in other cases it took several attempts and
-some hints from the moderator to try a relevant function. While better
-documentation and error messages could help improve the learnability of
-the formula language, we also did not find it surprising that
-participants required some time to learn a completely unfamiliar formula
-language.
-
-\hypertarget{cognitive-dimensions-analysis}{%
-\subsection{Cognitive Dimensions
-Analysis}\label{cognitive-dimensions-analysis}}
-
-We analyzed Joker using the Cognitive Dimensions of Notation
-\citep{blackwell2001}, a heuristic evaluation framework that has been
-used to evaluate programming languages and visual programming systems
-\citep{satyanarayan2014, satyanarayan2014a, ledo2018}. When contrasting
-our tool with other scraping and customization tools, we find
-particularly meaningful differences along several dimensions:
-
-\emph{Progressive evaluation.} In Joker, a user can see the intermediate
-results of their extraction and augmentation work at any point, and
-adjust their future actions accordingly. The table user interface makes
-it easy to inspect the intermediate results and notice surprises like
-missing values.
-
-In contrast, traditional extraction typically requires editing the code,
-manually re-running it, and inspecting the results in an unstructured
-textual format, making it harder to progressively evaluate the results.
-Also, many end-user extraction tools \citep{chasins2018, lin2009}
-require the user to demonstrate all the data extractions they want to
-perform before showing any information about how those demonstrations
-will generalize across multiple examples.\footnote{This is an instance
-  where Joker's limitation of only scraping a single page at a time
-  proves beneficial. All the relevant data is already available on the
-  page without further network requests, making it possible to support
-  progressive evaluation with low latency. Other tools that support
-  scraping across multiple pages necessarily require a slower feedback
-  loop.}
-
-\emph{Premature commitment.} Many scraping tools require making a
-\emph{premature commitment} to a data schema: first, the user extracts a
-dataset, and then they perform augmentations using that data. Wildcard
-suffered from this problem: when writing code for extraction, a user
-would need to anticipate all future augmentations and extract the
-necessary data.
-
-Joker instead supports extracting data \emph{on demand}. The user can
-decide on their desired augmentations and extract data as needed to
-fulfill those tasks. There is never a need to eagerly guess what data
-will be needed in advance.
-
-We have also borrowed a technique from spreadsheets for avoiding
-premature commitment: default naming. New data columns are automatically
-assigned a single-letter name, so that the user does not need to
-prematurely think of a name before extracting the data. We have not yet
-implemented the capability to optionally rename demonstrated columns,
-but it would be straightforward to do so, and would provide a way to
-offer the benefits of names without requiring a premature commitment.
-
-\emph{Provisionality.} Joker makes it easy to try out an extraction
-action without fully committing to it. When the user hovers over any
-element in a website, they see a preview of how that data would be
-extracted into the table, and then they can click if they'd like to
-proceed. This makes it feel very fast and lightweight to try scraping
-different elements on the page.
-
-\emph{Viscosity.} Some scraping tools have high viscosity: they make it
-difficult to change a single part of an extraction specification without
-modifying the global structure. For example, in Rousillon
-\citep{chasins2018}, changing the desired demonstration for a single
-column of a table requires re-demonstrating all of the columns. In
-contrast, Joker allows a user to change the specification for a single
-column of a table without modifying the others, resulting in a lower
-viscosity in response to changes.
+\begin{table*}[]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Website}              & \textbf{Example Customization Achieved by Joker}                                        \\ \hline
+eBay, Amazon            & Filter listings by whether they have a "Sponsored" label.                        \\
+Amazon, Target & Sort search results by price and rating.                                                \\
+Google Scholar                & Filter publications for those whose title contains a user-provided keyword. \\
+Reddit, CNN, ABC  & Sort by the read times of articles. Filter already-visited articles.         \\
+Weather.com                   & Filter hourly weather to find sunny times of day.                                        \\
+Github                        & Sort a user's code repositories by stars to find popular work.                          \\
+Postmates, Uber Eats    & Sort restaurants by delivery time and delivery fee.                                     \\ \hline
+\end{tabular}
+\vspace{8pt}
+\caption{Examples of websites that Joker can be used to customize, including extraction and augmentation}
+\end{table*}
 
 \hypertarget{sec:related-work}{%
 \section{Related Work}\label{sec:related-work}}
-
-Joker builds on existing work in end-user web customization, end-user
-web scraping and program synthesis.
 
 \hypertarget{end-user-web-customization}{%
 \subsection{End-user Web
@@ -820,13 +607,6 @@ fail, it gives the user the option of demonstrating to correct some
 parts of the result. In contrast, Joker makes fewer assumptions about
 the structure of websites, by giving control to the user from the
 beginning of the process and displaying an editable synthesized program.
-We hypothesize that focusing on a tight feedback loop rather than
-automation may support a scraping process that offers more expressive
-power and extends to a greater variety of websites, but further user
-testing is required to validate this hypothesis. Of course, better
-heuristics could benefit our model as well; the ideal system would make
-good guesses while giving the user full understanding and control of the
-extraction process.
 
 \hypertarget{end-user-web-scraping-and-program-synthesis}{%
 \subsection{End-user Web Scraping and Program
@@ -856,20 +636,14 @@ beside examples for guiding the generalization process of PBE tools like
 FlashExtract \citep{le2014} and FlashFill \citep{harris}. This is
 important because demonstrations are an ambiguous specification for
 program synthesis \citep{peleg2018}: the set of synthesized programs for
-a demonstration can be very large. The Program Navigation UI displays a
-natural language description of a space of possible programs, and lets
-the user choose different alternatives for parts of the generated
-expression. Joker shares the general idea of displaying synthesized
-programs, but only presents the top-ranked program; our tool might be
-improved by showing more candidate programs.
+a demonstration can be very large. Joker shares the general idea of
+displaying synthesized programs, but only presents the top-ranked
+program.
 
 More broadly, Joker's use of PBD to generate editable code embodies Ravi
 Chugh's notion of \emph{prodirect manipulation} \citep{chugh2016a},
-which aims to bridge the divide between programmatic and direct
-manipulation. The Sketch-N-Sketch system \citep{chugh2016} provides
-prodirect manipulation by allowing users to create an SVG shape via
-traditional programming and then switch to modifying its size or shape
-via direct manipulation.
+implemented in Sketch-N-Sketch \citep{chugh2016}, which aims to bridge
+the divide between programmatic and direct manipulation.
 
 \hypertarget{sec:conclusion}{%
 \section{Conclusion And Future Work}\label{sec:conclusion}}
@@ -878,29 +652,21 @@ In this paper, we presented a unified interaction model for web
 customization. Our key idea is a spreadsheet formula language that
 encompasses both extraction and augmentation tasks, along with a
 programming-by-demonstration (PBD) interface that makes it easy for
-end-users to program to create formulas. This unified interaction model
-allows end-users to move seamlessly between extraction and augmentation,
-resulting in a more iterative and free-form workflow for web
-customization.
+end-users to program to create formulas. The main area of future work
+involves making the formula language more accessible to end-users not
+familiar with CSS selectors. Our ultimate goal is to enable anyone that
+uses the web to customize websites in the course of their daily use in
+an intuitive and flexible way.
 
-The main area of future work involves making the formula language more
-accessible to end-users not familiar with CSS selectors. FlashProg
-offers some clues through its use of natural language descriptions to
-explain synthesized extraction programs. One avenue for explaining CSS
-selectors could be by extracting semantic web content associated with
-the elements they select, as seen in systems like Thresher
-\citep{hogue2005}.
+% \printbibliography
 
-Our ultimate goal is to enable anyone that uses the web to customize
-websites in the course of their daily use in an intuitive and flexible
-way. This will in turn make the malleability of the web a reality for
-all of its users.
-
-\newpage
-
-
-
-\bibliographystyle{IEEEtran}
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{references-bibtex.bib}
 
 \end{document}
+\endinput
+%%
+%% End of file `sample-sigconf.tex'.
