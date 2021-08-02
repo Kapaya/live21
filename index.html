@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,700" rel="stylesheet">
+  <meta name="author" content="Kapaya Katongo, Geoffrey Litt, Kathryn Jin and Daniel Jackson" />
+  <title>A Unified Model For Web Scraping &amp; Customization</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+  <link rel="stylesheet" href="basic.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<header id="title-block-header">
+<h1 class="title">A Unified Model For Web Scraping &amp; Customization</h1>
+<p class="author">By Kapaya Katongo, Geoffrey Litt, Kathryn Jin and Daniel Jackson</p>
+<p class="date">This paper will be submitted to the 2021 <a href="https://conf.researchr.org/home/vlhcc-2021">VL/HCC</a> conference. Also available in a <a href="index.pdf">PDF version</a>.</p>
+</header>
+<p>Websites are malleable: users can run code in the browser to customize them. However, this malleability is typically only accessible to programmers with knowledge of HTML and Javascript.</p>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#sec:introduction"><span class="toc-section-number">1</span> Introduction</a></li>
+<li><a href="#sec:examples"><span class="toc-section-number">2</span> Motivating Example</a></li>
+<li><a href="#sec:implementation"><span class="toc-section-number">3</span> System Implementation</a></li>
+<li><a href="#sec:design-principles"><span class="toc-section-number">4</span> Design Principles</a></li>
+<li><a href="#sec:evaluation"><span class="toc-section-number">5</span> Evaluation</a></li>
+<li><a href="#sec:related-work"><span class="toc-section-number">6</span> Related Work</a></li>
+<li><a href="#sec:conclusion"><span class="toc-section-number">7</span> Conclusion And Future Work</a></li>
+<li><a href="#bibliography">References</a></li>
+</ul>
+</nav>
+<h1 data-number="1" id="sec:introduction"><span class="header-section-number">1</span> Introduction</h1>
+<p>Many websites on the internet do not meet the exact needs of all of their users. End-user web customization systems like Thresher <span class="citation" data-cites="hogue2005">[<a href="#ref-hogue2005" role="doc-biblioref">15</a>]</span>, Sifter <span class="citation" data-cites="huynh2006">[<a href="#ref-huynh2006" role="doc-biblioref">17</a>]</span> and Vegemite <span class="citation" data-cites="lin2009">[<a href="#ref-lin2009" role="doc-biblioref">21</a>]</span> help users to tweak and adapt websites to fit their unique requirements, ranging from reorganizing or annotating content on the website to automating common tasks. Millions of people also use tools like Greasemonkey <span class="citation" data-cites="zotero-177">[<a href="#ref-zotero-177" role="doc-biblioref">5</a>]</span> and Tampermonkey <span class="citation" data-cites="zotero-191">[<a href="#ref-zotero-191" role="doc-biblioref">6</a>]</span> to install browser userscripts, snippets of Javascript code which customize the behavior of websites.</p>
+<p>We previously developed an alternative approach known as data-driven web customization <span class="citation" data-cites="litt2020 litt2020b">[<a href="#ref-litt2020b" role="doc-biblioref">22</a>,<a href="#ref-litt2020" role="doc-biblioref">23</a>]</span>. It enables web customization without traditional programming through direct manipulation of a spreadsheet-like table, right within the context of a browser. In this paradigm, a table is added to a website that contains its underlying structured data and is bidirectionally synchronized with it. Changes to the table, including sorting, filtering, adding columns and running computations in a spreadsheet-like formula language are propagated to the website thereby customizing it.</p>
+<p>While end-user friendly, data-driven web customization suffers from a divide between generating the table and using it to perform customizations: the table is generated through web scraping code, referred to as <em>website adapters</em>, written by programmers but used via direct manipulation by end-users. This divide limits the agency of end-users because they rely on programmers to write the required web scraping code before being able to customize a website.</p>
+<p>To bridge this divide, we start by harnessing programming-by-demonstration to achieve end-user web scraping within the context of the table used for customizations. This is achieved via a technique called <em>wrapper induction</em> which we discuss in Section 3. As in prior approaches <span class="citation" data-cites="chasins2018 le2014">[<a href="#ref-chasins2018" role="doc-biblioref">10</a>,<a href="#ref-le2014" role="doc-biblioref">20</a>]</span>, users demonstrate examples of column values and the system uses the demonstration to synthesize a program that generalizes to all the available column values. However, this is not effective as it reduces the expressiveness of web scraping for programmers for when demonstrating is not sufficient and hides the underlying program synthesized to perform the web scraping, thus preventing modifications to be made to it. This friction between designing for both end-users and programmers is a general problem with software interfaces as discussed by Chugh in his position paper <span class="citation" data-cites="chugh2016a">[<a href="#ref-chugh2016a" role="doc-biblioref">11</a>]</span>.</p>
+<p>To fully bridge the divide, we build on several key design goals we discuss in Section 4 to evolve end-user web scraping: users scrape by demonstrating values on the website and the system presents a formula, in the aforementioned spreadsheet-like formula language, corresponding to the synthesized web scraping program as a Cascading Style Sheet (CSS) selector. This is important because it enables programmers to view the synthesized CSS selector, modify it and even write one from scratch, thereby achieving the seemingly opposing goals of empowering end-users without disempowering programmers. Because the web scraping process generates formulas in the same format as formulas used for customization, we can fuse the two into a unified model for web scraping and customization in which users can interleave scraping and customizing. This results in a more incremental approach to building web customizations as we show in Section 2.</p>
+<p>To test the viability of our unified model for web scraping and customization, we implement it as an extension of Wildcard, a browser extension that implements data-driven web customization. Our contributions are:</p>
+<ul>
+<li>A <strong>unified model for web scraping and customization</strong> that enables end-users to perform the task of web scraping via demonstrations and programmers to view and modify the web scraping program synthesized from demonstrations, both within the context of the table used for customization</li>
+<li>A novel combination of design principles (<strong>Unified User Model</strong>, <strong>Functional Reactive Programming</strong> and <strong>Mixed-Initiative Interaction</strong>) which make our unified model for web scraping and customization seamless for both end-users and programmers</li>
+<li>An example gallery of websites that can be customized via our unified model for web scraping and customization and a preliminary user study providing some qualitative results of using it, both in Section 5</li>
+</ul>
+<h1 data-number="2" id="sec:examples"><span class="header-section-number">2</span> Motivating Example</h1>
+<h1 data-number="3" id="sec:implementation"><span class="header-section-number">3</span> System Implementation</h1>
+<p>We implemented our unified model for web scrapingg and customization as an extension to Wildcard <span class="citation" data-cites="litt2020 litt2020b">[<a href="#ref-litt2020b" role="doc-biblioref">22</a>,<a href="#ref-litt2020" role="doc-biblioref">23</a>]</span>. Prior to this work, website adapters (web scraping code) were manually written in Javascript by programmers. Now, adapters can be created via demonstration and are represented in a spreadsheet-like formula language which can be viewed and modified. We start by describing our implementation of <em>wrapper induction</em> <span class="citation" data-cites="kushmerick2000">[<a href="#ref-kushmerick2000" role="doc-biblioref">19</a>]</span> which is what enables our system to generalize from the demonstration of a single column value to the entire set of column values. Then, we describe how our system synthesizes CSS selectors which select the elements to be scrapped. Finally, we briefly discuss how the unified user model is achieved and close with notable limitations of our current approach.</p>
+<h2 data-number="3.1" id="wrapper-induction-algorithm"><span class="header-section-number">3.1</span> Wrapper Induction Algorithm</h2>
+<p>In order to generate reusable scrapers from user demonstrations, our system solves the wrapper induction task: generalizing from a small set of user-provided examples to a scraping specification that will work on other parts of the website, and on future versions of the website.</p>
+<p>We take an approach similar to that used in other tools like Vegemite <span class="citation" data-cites="lin2009">[<a href="#ref-lin2009" role="doc-biblioref">21</a>]</span> and Sifter <span class="citation" data-cites="huynh2006">[<a href="#ref-huynh2006" role="doc-biblioref">17</a>]</span>:</p>
+<ul>
+<li>We synthesize a single <em>row selector</em> for the website: a CSS selector that returns a set of Document Object Model (DOM) elements corresponding to individual rows of the table.</li>
+<li>For each column in the table, we synthesize a <em>column selector</em>, a CSS selector that returns the element containing the column value within that row.</li>
+</ul>
+<p>One important difference is that our algorithm only accepts row elements that have direct siblings with a similar structure. We refer to this as the <em>row-sibling</em> constraint. Later, we describe how the constraint provides a useful simplification of the wrapper induction task and discuss the resulting limitations this puts on our system.</p>
+<p>When a user first demonstrates a column value, the generalization algorithm is responsible for turning the demonstration into a row selector that will correctly identify all the row elements in the website and a column selector that will correctly identify the element that contains the column value within a row element. During subsequent demonstrations, the generalization algorithm uses the generated row selector to find the row element that contains the column value and generates a column selector which identifies the corresponding column element.</p>
+<p>At a high level, the wrapper induction algorithm’s challenge is to traverse far enough up in the DOM tree from the demonstrated element to find the element which corresponds to the row. We solve this using a heuristic; the basic intuition is to find a large set of elements with similar parallel structure. Consider the sample HTML layout in Figure <strong>¿fig:algorithm?</strong>, which displays a truncated table of superheroes, with each row containing some nested structure:</p>
+<div class="pdf-only">
+
+</div>
+<p>The user performs a demonstration by clicking on element <span class="math inline"><em>a</em></span> in Figure <strong>¿fig:algorithm?</strong> containing “Tony Stark.” Our algorithm traverses upwards from the demonstrated element, considering each successive parent element (<span class="math inline"><em>b</em>1</span>, <span class="math inline"><em>c</em>1</span> and <span class="math inline"><em>d</em></span> in Figure <strong>¿fig:algorithm?</strong>) as a potential candidate for the row element. For each parent element <code>el</code>, the process is as follows:</p>
+<ol type="1">
+<li>Compute a column selector <code>selector</code> that, when executed on <code>el</code>, only returns the demonstrated element</li>
+<li>For each sibling <code>el'</code> of <code>el</code>, execute <code>selector</code> on <code>el'</code> and record whether the selector returns an element. If it does, this suggests that <code>el'</code> has some parallel structure to <code>el</code>.</li>
+<li>Compute <span class="math inline"><em>e</em><em>l</em><sub><em>s</em><em>i</em><em>b</em><em>l</em><em>i</em><em>n</em><em>g</em><em>s</em></sub></span>, the number of sibling elements of <code>el</code> which have parallel structure.</li>
+</ol>
+<p>Notice how the <em>row-sibling</em> constraint simplifies the problem. Row candidates without siblings with parallel structure (<span class="math inline"><em>b</em>1</span> in Figure <strong>¿fig:algorithm?</strong>) have <span class="math inline"><em>e</em><em>l</em><sub><em>s</em><em>i</em><em>b</em><em>l</em><em>i</em><em>n</em><em>g</em><em>s</em></sub></span> = 0, thus disqualifying them.</p>
+<p>The algorithm stops traversing upwards once it reaches the <code>BODY</code> element. It chooses the element with the largest positive value of <span class="math inline"><em>e</em><em>l</em><sub><em>s</em><em>i</em><em>b</em><em>l</em><em>i</em><em>n</em><em>g</em><em>s</em></sub></span> as the row element, preferring nodes lower in the tree as a tiebreaker. It then generates a <em>row selector</em> which returns the row element and all its direct siblings. The final value of <code>selector</code> is the column selector since traverses from the row element to the demonstrated data value. These row and column selectors are then used to generate a scraping adapter as a combination of formulas which returns the DOM elements corresponding to a data row in the table and sets up the bidirectional synchronization.</p>
+<h2 data-number="3.2" id="css-selector-synthesis-algorithms"><span class="header-section-number">3.2</span> CSS Selector Synthesis Algorithms</h2>
+<p>As part of the the wrapper induction process described in the previous section, our system synthesizes two types of CSS selectors: a single row selector that selects a set of DOM elements corresponding to individual rows of the table and a column selector for each column which selects the element containing the column value within a given row.</p>
+<p>For a given row element, it’s row selector is synthesized as follows:</p>
+<ol type="1">
+<li>Generate a list of all possible combinations of the classes on the element’s <code>class</code> attribute and initialize their scores to 0. For example, an element with a <code>class</code> attribute value of “a b c” would generate “a,” “b,” “c,” “a b,” “b c” and “a b c”</li>
+<li>Retrieve a list of all of the sibling elements of the element. For each sibling element, check whether it’s <code>class</code> attribute contains each of the generated class combinations. If a sibling’s <code>class</code> attirbute contains a given class combination, the combination’s score is incremented by 1</li>
+<li>Pick the class combinations with the highest score across the element’s siblings and then select the combination with the fewest number of classes. For example, if the combinations with the highest score are “a” and “b c,” “a” will be picked. This is done to ensure that only the minimal required classes are used for selection</li>
+<li>Combine the tag name of the element with the final selector to further ensure that it only selects the desired row elements. For example, if the row element is has a tag name of <code>DIV</code> and the final selector is “a” the synthesized selector will be <code>div.a</code></li>
+</ol>
+<p>For a given column element, it’s column selector is synthesized as follows:</p>
+<ol type="1">
+<li>Generate a list of all possible combinations of the classes on the element’s <code>class</code> attribute, as previously described, and initialize their scores to 0</li>
+<li>For each class combination, check that it only selects a single element within the row element and that that element corresponds to the given column element. If a class combination satisfies the check, its score is incremented by 1</li>
+<li>Pick the class combinations with the highest score and then select the combination with the fewest number of classes as previously described</li>
+<li>Combine the tag name of the element with the final selector to further ensure that it only selects the desired column element as previously described</li>
+</ol>
+<h2 data-number="3.3" id="unified-user-model"><span class="header-section-number">3.3</span> Unified User Model</h2>
+<h2 data-number="3.4" id="limitations"><span class="header-section-number">3.4</span> Limitations</h2>
+<p>Since our system is still under development, it has a variety of limitations. In this section we describe the most notable ones.</p>
+<h3 data-number="3.4.1" id="wrapper-induction-algorithm-1"><span class="header-section-number">3.4.1</span> Wrapper Induction Algorithm</h3>
+<p>The row-sibling constraint we mentioned earlier is important for the end goal of customization because row elements that are not direct siblings may not represent data on the website that should be related as part of the same table by customizations such as sorting and filtering. In Figure <strong>¿fig:limitations?</strong> we demonstrate two examples where this limitation becomes relevant.</p>
+<div class="pdf-only">
+
+</div>
+<p><em>Generalization Limitation 1</em> shows a case where the data is displayed in a grouped structure. Without the constraint that row elements have to be direct siblings, the row generalization algorithm could determine the row selector to be <em>.avenger</em> (elements with blue border) because it matches the largest number of parallel structures (has the largest <span class="math inline"><em>e</em><em>l</em><sub><em>s</em><em>i</em><em>b</em><em>l</em><em>i</em><em>n</em><em>g</em><em>s</em></sub></span>). While this may be the correct result for the task of extraction, it is not necessarily suitable for the task of customization. When the user sorts and filters, this could result in rows moving between the two tables, disrupting the nested layout and producing a confusing result. Because of this, our system currently does not support such layouts. In the future, we may explore the possibility of extracting multiple tables from a website and joining them together.</p>
+<p><em>Generalization Limitation 2</em>, also in Figure <strong>¿fig:limitations?</strong>, shows a case where the website contains one table of data in which rows are made up of alternating <code>H1</code> and <code>SPAN</code> tags (elements within blue border). This poses a challenge because each row does not correspond directly to a single DOM element; instead, each row consists of multiple consecutive DOM elements without any grouped structure. Moving the rows when customizing the website would require treating multiple consecutive elements as a single row. This is supported in the underlying Wildcard system, but not yet by our demonstration-based approach.</p>
+<h3 data-number="3.4.2" id="css-selector-synthesis-algorithms-1"><span class="header-section-number">3.4.2</span> CSS Selector Synthesis Algorithms</h3>
+<p>Our CSS selector synthesis algorithms guarantee the synthesis of a valid class-based selector if it is present because of its exhaustive nature. However, it does not guarantee that the synthesized selector is robust. Take column elements corresponding to a column of movie titles whose <code>class</code> attribute has a value of “column-1 movie-title.” Our algorithm would synthesize “column-1” as the column selector because it would be the first class in the generated class combination list and it selects all the column elements. An inexperienced programmer writing code to scrape the column elements could also use “column-1” for similar reasons. However, an experienced programmer would likely know to use “movie-title” because it describes the meaning of the element as opposed to its ordering which could change. In general, generating robust CSS selectors is a non trivial task even for humans [].</p>
+<p>Another shortcoming of our CSS synthesis algorithms is their reliance on the <code>class</code> attribute. CSS selectors can comprise various combinations of an element’s full set of attributes. For example, a desired set of link elements could not have a <code>class</code> attribute but could be selected based on the value of their <code>href</code> attribute using a selector like <code>a[href*=”/id/*”]</code>. This would select link elements whose <code>href</code> attribute ends with “/id/1” for example. Again, this is a task that is non trivial even for humans. Rousillon <span class="citation" data-cites="chasins2018">[<a href="#ref-chasins2018" role="doc-biblioref">10</a>]</span>, an end-user web scraping system that also utilizes programming-by-demonstration, uses Ringer <span class="citation" data-cites="barman2016">[<a href="#ref-barman2016" role="doc-biblioref">8</a>]</span> to select elements by saving all of their attributes during scraping and comparing them to candidate elements during selection. While this is more robust because it considers all of an element’s attributes, this does not fit our approach of representing selectors as formulas that can be viewed and modified by users.</p>
+<p>To handle the cases in which elements do not have a <code>class</code> attribute, our algorithms generate index-based selectors using the <code>nth-child</code> notation. This accurately select the given element but is not robust as the addition or removal of an element in the DOM could invalidate the selector.</p>
+<h1 data-number="4" id="sec:design-principles"><span class="header-section-number">4</span> Design Principles</h1>
+<h2 data-number="4.1" id="unified-user-model-1"><span class="header-section-number">4.1</span> Unified User Model</h2>
+<p>Prior to this work, web scraping and customization in Wildcard <span class="citation" data-cites="litt2020 litt2020b">[<a href="#ref-litt2020b" role="doc-biblioref">22</a>,<a href="#ref-litt2020" role="doc-biblioref">23</a>]</span> were divided: web scraping was done by programmers in an Integrated Development Environment (IDE) while customizing (via direct manipulation and formulas) was done in the browser. This type of divide between tasks can be seen in other domains:</p>
+<ul>
+<li>In data science, workflows revolve between cleaning and using data which often happen in different environments (e.g. data wrangling tools and live notebooks). Wrex <span class="citation" data-cites="drosos2020">[<a href="#ref-drosos2020" role="doc-biblioref">13</a>]</span>, an end-user programming-by-example system for data wrangling, reported that “although data scientists were aware of and appreciated the productivity benefits of existing data wrangling tools, having to leave their native notebook environment to perform wrangling limited the usefulness of these tools.” This was a major reason Wrex was developed as an add-on to Jupyter notebooks, the environment in which data scientists use their data.</li>
+<li>In web scraping, users have to switch from the environment in which they are using the scraped data (database, spreadsheet etc) to the environment in which the data is scraped if they need more of it or need to fix omissions. This can be seen in tools like Rousillon <span class="citation" data-cites="chasins2018">[<a href="#ref-chasins2018" role="doc-biblioref">10</a>]</span>, FlashExtract <span class="citation" data-cites="le2014">[<a href="#ref-le2014" role="doc-biblioref">20</a>]</span> and import.io <span class="citation" data-cites="import.io">[<a href="#ref-import.io" role="doc-biblioref">18</a>]</span>.</li>
+</ul>
+<p>Based on this, we have provided support for end-user web scraping in Wildcard in a uniform environment via the table used for customization. This relates to the idea of “in-place toolchains” <span class="citation" data-cites="zotero-165">[<a href="#ref-zotero-165" role="doc-biblioref">4</a>]</span> for end-user programming systems: users should be able to program using familiar tools (spreadsheet table) in the context where they already use their software (browsers).</p>
+<p>In spite of this, web scraping and customization are still divided: web scraping has to be performed prior to customization in a separate phase. Early user tests revealed that this discontinuity between the two phases was a source of confusion. Vegemite <span class="citation" data-cites="lin2009">[<a href="#ref-lin2009" role="doc-biblioref">21</a>]</span>, a system for end-user programming of mashups, reported similar findings from its user study in which participants thought that “it was confusing to use one technique to create the initial table, and another technique to add information to a new column.”</p>
+<p>Armed with this, we go beyond providing a uniform environment for web scraping and customization to providing a <em>unified user model</em> for web scraping and customization. Both web scraping and customization are performed in the same, single phase, with users being able to seamlessly interleave the two as desired. We can see this in the Ebay example in Section 2: the user starts out by demonstrating to scrape values on the website into a column in the table, proceeds to populate the next column with the results of a formula, sorts the table to view the resulting customization and then continues on to the next task.</p>
+<h2 data-number="4.2" id="functional-reactive-programming"><span class="header-section-number">4.2</span> Functional Reactive Programming</h2>
+<p>In general terms, functional reactive programming (FRP) is the combination of functional and reactive programming: it is functional in that it uses functions to define programs that manipulate data and reactive in that it defines data flows through which changes in data are propagated.</p>
+<p>FRP has seen wide adoption in end-user programming through implementations such as spreadsheet formula languages (Microsoft Excel &amp; Google Sheets) and formula languages for low-code programming environments (Microsoft Power Fx <span class="citation" data-cites="zotero-150">[<a href="#ref-zotero-150" role="doc-biblioref">2</a>]</span>, Google AppSheet <span class="citation" data-cites="zotero-218">[<a href="#ref-zotero-218" role="doc-biblioref">7</a>]</span>, Glide <span class="citation" data-cites="zotero-148">[<a href="#ref-zotero-148" role="doc-biblioref">1</a>]</span>, Coda <span class="citation" data-cites="zotero-155">[<a href="#ref-zotero-155" role="doc-biblioref">3</a>]</span> &amp; Gneiss <span class="citation" data-cites="chang2014">[<a href="#ref-chang2014" role="doc-biblioref">9</a>]</span>).</p>
+<p>Because of this, Wildcard <span class="citation" data-cites="litt2020 litt2020b">[<a href="#ref-litt2020b" role="doc-biblioref">22</a>,<a href="#ref-litt2020" role="doc-biblioref">23</a>]</span> already provides functional reactive programming via a spreadsheet-like formula language aimed at increasing the expressiveness of customizations. The language provides formulas to encapsulate logic, perform operations on strings, call browser APIs and even invoke web APIs. As per the FRP paradigm, users only have to think in terms of manipulating the data in the table without having to worry about traditional programming concepts such as variables and data flow. This makes it easier for them to program customizations in a declarative manner without having to worry about all the steps that have to take place to make this possible.</p>
+<p>Our unified model for web scraping and customizations extends this formula language to mitigate the limitations of programming-by-demonstration to specify complex web scraping tasks. Demonstrations are represented as formulas containing the corresponding, synthesized web scraping code as a CSS selector. As with other formulas in the language, the synthesized web scraping formulas can be modified (or authored from scratch) and run to achieve more expressive web scraping. We can see this in the Ebay example in Section 2 when the user manually authors a formula to scrape the value of the column of ratings. Because of FRP, all the user has to do is provide is a CSS selector that will select the desired elements: the row iteration and extraction of values from the elements is done automatically for them.</p>
+<h2 data-number="4.3" id="mixed-initiative-interaction"><span class="header-section-number">4.3</span> Mixed-Initiative Interaction</h2>
+<p>In a position paper <span class="citation" data-cites="chugh2016a">[<a href="#ref-chugh2016a" role="doc-biblioref">11</a>]</span>, Chugh discusses how programmatic and direct manipulation systems each have distinct strengths but users are often forced to choose one over another. As a solution, he makes a proposal for “novel software systems that tightly couple programmatic and direct manipulation” which led to the emergence of systems like Sketch-N-Sketch <span class="citation" data-cites="chugh2016">[<a href="#ref-chugh2016" role="doc-biblioref">12</a>]</span>. More generally, this idea relates to work on mixed-initiative interaction by Horvitz <span class="citation" data-cites="horvitz1999">[<a href="#ref-horvitz1999" role="doc-biblioref">16</a>]</span> in which he advocates for “designs that take advantage of the power of direct manipulation and potentially valuable automated reasoning.”</p>
+<p>Our unified model for web scraping and customization offers mixed-initiative interaction by presenting the result of web scraping by demonstration as a formula. This is advantageous as it not only allows users to delegate automation (via synthesis of web scraping programs) to the system via demonstrations but also keeps the interaction loop open by allowing users to view and modify the output of the demonstration. In the Ebay example in Section 2, the user starts out by demonstrating to scrape, switches to manually authoring a web scraping formula when demonstrating is insufficient and then switches back to demonstrating, all in a seamless and fluid manner.</p>
+<p>This type of mixed-initiative interaction can be seen in other programming-by-example systems:</p>
+<ul>
+<li>Sketch-N-Sketch <span class="citation" data-cites="chugh2016">[<a href="#ref-chugh2016" role="doc-biblioref">12</a>]</span> integrates direct manipulation and programming for the creation of Scalable Vector Graphics (SVG). Users can start out by creating a shape via programming and then switch to modifying its size or shape via direct manipulation which updates the underlying program to reflect the changes. Their central theme is that users do not have to choose between direct manipulation and programmatic systems</li>
+<li>Wrex <span class="citation" data-cites="drosos2020">[<a href="#ref-drosos2020" role="doc-biblioref">13</a>]</span> takes examples of data transforms and generates readable and editable Python code. This was motivated by their formative study in which participants emphasized the need for programming-by-example systems to “produce code as an inspectable and modifiable artifact”</li>
+<li>Small-Step Live Programming By Example <span class="citation" data-cites="ferdowsifard2020">[<a href="#ref-ferdowsifard2020" role="doc-biblioref">14</a>]</span> presents a paradigm in which programming-by-example is used to synthesize small parts of a user authored program instead of delegating construction of entire program</li>
+<li>Peleg et al <span class="citation" data-cites="peleg2018">[<a href="#ref-peleg2018" role="doc-biblioref">25</a>]</span> outline how programming-by-example is not enough to differentiate all the possible programs and present an interaction model in which users not only provide feedback about the expected output of the program but also the program itself</li>
+<li>Mayer et al <span class="citation" data-cites="mayer2015">[<a href="#ref-mayer2015" role="doc-biblioref">24</a>]</span> report that “a key impedance in adoption of PBE systems is the lack of user confidence in the correctness of the program that was synthesized by the system.” They describe how even though FlashFill, a programming-by-example tool for string manipulation in Excel, received many positive reviews from popular media sources, a prominent Excel user expressed caution because of the lack of insight into what the synthesized program is actually doing. To this end, they developed a under interaction model called Program Navigation which allows users to navigate between all synthesized programs instead of only displaying the top-ranked one</li>
+</ul>
+<h1 data-number="5" id="sec:evaluation"><span class="header-section-number">5</span> Evaluation</h1>
+<h2 data-number="5.1" id="example-gallery"><span class="header-section-number">5.1</span> Example Gallery</h2>
+<h2 data-number="5.2" id="user-study"><span class="header-section-number">5.2</span> User Study</h2>
+<h2 data-number="5.3" id="cognitive-dimensions-analysis"><span class="header-section-number">5.3</span> Cognitive Dimensions Analysis</h2>
+<p><em>GL note: This is, obviously, still an outline, to be turned into prose</em></p>
+<ul>
+<li>CDs is commonly used to evaluate HCI systems (cite the Lyra 2 citations etc)</li>
+<li>Here we evaluate our tool along some salient dimensions to compare/contrast to other tools, including 1) traditional scraping by writing code, 2) other end-user scraping and customization systems.</li>
+<li><strong>Progressive evaluation</strong>: work up to this point can be checked at any time.
+<ul>
+<li>Wildcard allows for immediately seeing results of scraping and customization after every single action.</li>
+<li>Contrast:
+<ul>
+<li>traditional scraping tools: change the code; manually reload / re-run</li>
+<li>Helena / Vegemite: need to perform the whole demonstration before you see how it generalizes (this is mainly because they have to navigate across pages, so they can’t provide such low latency; we benefit from only scraping one page)</li>
+</ul></li>
+</ul></li>
+<li><strong>Premature commitment</strong>: constraints on the order of doing things
+<ul>
+<li>In most traditional scraping workflows, scraping must happen first (eg into a spreadsheet) and then using the data happens later. Need to commit to <em>what data you will need</em></li>
+<li>In our model, you can scrape new data on demand, as you realize you need it for your desired customization</li>
+<li>A minor thing: don’t even need to name columns, just like spreadsheets. (We acknowledge it would be useful to add column naming as an optional feature)</li>
+</ul></li>
+<li><strong>Provisionality</strong>: degree of commitment to actions
+<ul>
+<li>The hover state lets the user preview what’s going to happen before they actually commit to scraping it</li>
+<li>If you don’t like what happened after you “commit,” still easy to back out and edit/remove the column</li>
+</ul></li>
+<li><strong>Viscosity</strong>: resistance to change
+<ul>
+<li>Can re-demonstrate just one part of the scraper</li>
+<li>Can even just change part of a formula (is this relevant?)</li>
+<li>Contrast: In Helena, you have to re-demonstrate the whole thing if you want to, say, change a selector. So it’s hard to make small changes.</li>
+</ul></li>
+</ul>
+<p>Not sure whether to include these:</p>
+<ul>
+<li><strong>Role-expressiveness</strong>: the purpose of an entity is readily inferred
+<ul>
+<li>This is an area of improvement for the system. We don’t differentiate much between scraping code and customization code / DOM element values vs normal values.</li>
+</ul></li>
+<li><strong>Hidden dependencies</strong>: as in spreadsheets, dependencies between cells are hidden; there are also hidden dependencies from the DOM to the table. In practice not a huge problem though?</li>
+</ul>
+<h1 data-number="6" id="sec:related-work"><span class="header-section-number">6</span> Related Work</h1>
+<h1 data-number="7" id="sec:conclusion"><span class="header-section-number">7</span> Conclusion And Future Work</h1>
+<h1 class="unnumbered" id="bibliography">References</h1>
+<div id="refs" class="references csl-bib-body" role="doc-bibliography">
+<div id="ref-zotero-148" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Build an app from a <span>Google Sheet</span> in five minutes, for free • <span>Glide</span>. Retrieved March 14, 2021 from <a href="https://www.glideapps.com/">https://www.glideapps.com/</a></div>
+</div>
+<div id="ref-zotero-150" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Business <span>Apps</span> | <span>Microsoft Power Apps</span>. Retrieved March 13, 2021 from <a href="https://powerapps.microsoft.com/en-us/">https://powerapps.microsoft.com/en-us/</a></div>
+</div>
+<div id="ref-zotero-155" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Coda | <span>A</span> new doc for teams. Retrieved March 14, 2021 from <a href="https://coda.io/welcome">https://coda.io/welcome</a></div>
+</div>
+<div id="ref-zotero-165" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">End-user programming. Retrieved February 12, 2021 from <a href="https://www.inkandswitch.com/end-user-programming.html">https://www.inkandswitch.com/end-user-programming.html</a></div>
+</div>
+<div id="ref-zotero-177" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Greasemonkey – <span>Get</span> this <span>Extension</span> for 🦊 <span>Firefox</span> (en-<span>US</span>). Retrieved March 13, 2021 from <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/</a></div>
+</div>
+<div id="ref-zotero-191" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Tampermonkey for <span>Chrome</span>. Retrieved March 13, 2021 from <a href="http://www.tampermonkey.net">http://www.tampermonkey.net</a></div>
+</div>
+<div id="ref-zotero-218" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline"><span>AppSheet</span>: <span>No</span>-code <span>App Development</span>  |  <span>Google Cloud</span>. Retrieved April 20, 2021 from <a href="https://cloud.google.com/appsheet">https://cloud.google.com/appsheet</a></div>
+</div>
+<div id="ref-barman2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Shaon Barman, Sarah Chasins, Rastislav Bodik, and Sumit Gulwani. 2016. Ringer: Web automation by demonstration. In <em>Proceedings of the 2016 <span>ACM SIGPLAN International Conference</span> on <span>Object</span>-<span>Oriented Programming</span>, <span>Systems</span>, <span>Languages</span>, and <span>Applications</span></em>, <span>ACM</span>, <span>Amsterdam Netherlands</span>, 748–764. DOI:https://doi.org/<a href="https://doi.org/10.1145/2983990.2984020">10.1145/2983990.2984020</a></div>
+</div>
+<div id="ref-chang2014" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Kerry Shih-Ping Chang and Brad A. Myers. 2014. Creating interactive web data applications with spreadsheets. In <em>Proceedings of the 27th annual <span>ACM</span> symposium on <span>User</span> interface software and technology</em>, <span>ACM</span>, <span>Honolulu Hawaii USA</span>, 87–96. DOI:https://doi.org/<a href="https://doi.org/10.1145/2642918.2647371">10.1145/2642918.2647371</a></div>
+</div>
+<div id="ref-chasins2018" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Sarah E. Chasins, Maria Mueller, and Rastislav Bodik. 2018. Rousillon: <span>Scraping Distributed Hierarchical Web Data</span>. In <em>The 31st <span>Annual ACM Symposium</span> on <span>User Interface Software</span> and <span>Technology</span> - <span>UIST</span> ’18</em>, <span>ACM Press</span>, <span>Berlin, Germany</span>, 963–975. DOI:https://doi.org/<a href="https://doi.org/10.1145/3242587.3242661">10.1145/3242587.3242661</a></div>
+</div>
+<div id="ref-chugh2016a" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">Ravi Chugh. 2016. Prodirect manipulation: Bidirectional programming for the masses. In <em>Proceedings of the 38th <span>International Conference</span> on <span>Software Engineering Companion</span></em>, <span>ACM</span>, <span>Austin Texas</span>, 781–784. DOI:https://doi.org/<a href="https://doi.org/10.1145/2889160.2889210">10.1145/2889160.2889210</a></div>
+</div>
+<div id="ref-chugh2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">Ravi Chugh, Brian Hempel, Mitchell Spradlin, and Jacob Albers. 2016. Programmatic and direct manipulation, together at last. In <em>Proceedings of the 37th <span>ACM SIGPLAN Conference</span> on <span>Programming Language Design</span> and <span>Implementation</span></em>, <span>ACM</span>, <span>Santa Barbara CA USA</span>, 341–354. DOI:https://doi.org/<a href="https://doi.org/10.1145/2908080.2908103">10.1145/2908080.2908103</a></div>
+</div>
+<div id="ref-drosos2020" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">Ian Drosos, Titus Barik, Philip J. Guo, Robert DeLine, and Sumit Gulwani. 2020. Wrex: <span>A Unified Programming</span>-by-<span>Example Interaction</span> for <span>Synthesizing Readable Code</span> for <span>Data Scientists</span>. In <em>Proceedings of the 2020 <span>CHI Conference</span> on <span>Human Factors</span> in <span>Computing Systems</span></em>, <span>ACM</span>, <span>Honolulu HI USA</span>, 1–12. DOI:https://doi.org/<a href="https://doi.org/10.1145/3313831.3376442">10.1145/3313831.3376442</a></div>
+</div>
+<div id="ref-ferdowsifard2020" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">Kasra Ferdowsifard, Allen Ordookhanians, Hila Peleg, Sorin Lerner, and Nadia Polikarpova. 2020. Small-<span>Step Live Programming</span> by <span>Example</span>. (2020), 13.</div>
+</div>
+<div id="ref-hogue2005" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">Andrew Hogue and David Karger. 2005. Thresher: Automating the unwrapping of semantic content from the <span>World Wide Web</span>. In <em>Proceedings of the 14th international conference on <span>World Wide Web</span> - <span>WWW</span> ’05</em>, <span>ACM Press</span>, <span>Chiba, Japan</span>, 86. DOI:https://doi.org/<a href="https://doi.org/10.1145/1060745.1060762">10.1145/1060745.1060762</a></div>
+</div>
+<div id="ref-horvitz1999" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">Eric Horvitz. 1999. Principles of mixed-initiative user interfaces. In <em>Proceedings of the <span>SIGCHI</span> conference on <span>Human</span> factors in computing systems the <span>CHI</span> is the limit - <span>CHI</span> ’99</em>, <span>ACM Press</span>, <span>Pittsburgh, Pennsylvania, United States</span>, 159–166. DOI:https://doi.org/<a href="https://doi.org/10.1145/302979.303030">10.1145/302979.303030</a></div>
+</div>
+<div id="ref-huynh2006" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[17] </div><div class="csl-right-inline">David F. Huynh, Robert C. Miller, and David R. Karger. 2006. Enabling web browsers to augment web sites’ filtering and sorting functionalities. In <em>Proceedings of the 19th annual <span>ACM</span> symposium on <span>User</span> interface software and technology - <span>UIST</span> ’06</em>, <span>ACM Press</span>, <span>Montreux, Switzerland</span>, 125. DOI:https://doi.org/<a href="https://doi.org/10.1145/1166253.1166274">10.1145/1166253.1166274</a></div>
+</div>
+<div id="ref-import.io" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[18] </div><div class="csl-right-inline">import.io. Data <span>Scraping</span> | <span>Web Scraping</span> | <span>Screen Scraping</span> | <span>Extract</span>. Retrieved February 14, 2021 from <a href="https://www.import.io/product/extract/">https://www.import.io/product/extract/</a></div>
+</div>
+<div id="ref-kushmerick2000" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[19] </div><div class="csl-right-inline">Nicholas Kushmerick. 2000. Wrapper induction: <span>Efficiency</span> and expressiveness. <em>Artificial Intelligence</em> 118, 1 (April 2000), 15–68. DOI:https://doi.org/<a href="https://doi.org/10.1016/S0004-3702(99)00100-9">10.1016/S0004-3702(99)00100-9</a></div>
+</div>
+<div id="ref-le2014" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[20] </div><div class="csl-right-inline">Vu Le and Sumit Gulwani. 2014. <span>FlashExtract</span>: A framework for data extraction by examples. In <em>Proceedings of the 35th <span>ACM SIGPLAN Conference</span> on <span>Programming Language Design</span> and <span>Implementation</span></em>, <span>ACM</span>, <span>Edinburgh United Kingdom</span>, 542–553. DOI:https://doi.org/<a href="https://doi.org/10.1145/2594291.2594333">10.1145/2594291.2594333</a></div>
+</div>
+<div id="ref-lin2009" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[21] </div><div class="csl-right-inline">James Lin, Jeffrey Wong, Jeffrey Nichols, Allen Cypher, and Tessa A. Lau. 2009. End-user programming of mashups with vegemite. In <em>Proceedings of the 14th international conference on <span>Intelligent</span> user interfaces</em> (<span>IUI</span> ’09), <span>Association for Computing Machinery</span>, <span>New York, NY, USA</span>, 97–106. DOI:https://doi.org/<a href="https://doi.org/10.1145/1502650.1502667">10.1145/1502650.1502667</a></div>
+</div>
+<div id="ref-litt2020b" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[22] </div><div class="csl-right-inline">Geoffrey Litt and Daniel Jackson. 2020. Wildcard: <span>Spreadsheet</span>-<span>Driven Customization</span> of <span>Web Applications</span>. In <em>Companion <span>Proceedings</span> of the 4th <span>International Conference</span> on the <span>Art</span>, <span>Science</span>, and <span>Engineering</span> of <span>Programming</span></em>, <span>Association for Computing Machinery</span>, <span>Porto, Portugal.</span>, 10. DOI:https://doi.org/<a href="https://doi.org/10.1145/3397537.3397541">10.1145/3397537.3397541</a></div>
+</div>
+<div id="ref-litt2020" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[23] </div><div class="csl-right-inline">Geoffrey Litt, Daniel Jackson, Tyler Millis, and Jessica Quaye. 2020. End-user <span>Software Customization</span> by <span>Direct Manipulation</span> of <span>Tabular Data</span>. In <em>Proceedings of the 2020 <span>ACM SIGPLAN International Symposium</span> on <span>New Ideas</span>, <span>New Paradigms</span>, and <span>Reflections</span> on <span>Programming</span> and <span>Software</span></em>, <span>ACM</span>, <span>Virtual USA</span>, 18–33. DOI:https://doi.org/<a href="https://doi.org/10.1145/3426428.3426914">10.1145/3426428.3426914</a></div>
+</div>
+<div id="ref-mayer2015" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[24] </div><div class="csl-right-inline">Mikaël Mayer, Gustavo Soares, Maxim Grechkin, Vu Le, Mark Marron, Oleksandr Polozov, Rishabh Singh, Benjamin Zorn, and Sumit Gulwani. 2015. User <span>Interaction Models</span> for <span>Disambiguation</span> in <span>Programming</span> by <span>Example</span>. In <em>Proceedings of the 28th <span>Annual ACM Symposium</span> on <span>User Interface Software</span> &amp; <span>Technology</span></em>, <span>ACM</span>, <span>Charlotte NC USA</span>, 291–301. DOI:https://doi.org/<a href="https://doi.org/10.1145/2807442.2807459">10.1145/2807442.2807459</a></div>
+</div>
+<div id="ref-peleg2018" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline">Hila Peleg, Sharon Shoham, and Eran Yahav. 2018. Programming not only by example. In <em>Proceedings of the 40th <span>International Conference</span> on <span>Software Engineering</span></em>, <span>ACM</span>, <span>Gothenburg Sweden</span>, 1114–1124. DOI:https://doi.org/<a href="https://doi.org/10.1145/3180155.3180189">10.1145/3180155.3180189</a></div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38867184-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

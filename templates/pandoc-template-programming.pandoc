@@ -1,0 +1,138 @@
+% -*- coding: utf-8; -*-
+% vim: set fileencoding=utf-8 :
+\documentclass[english]{programming}
+%% First parameter: the language is 'english'.
+%% Second parameter: use 'submission' for initial submission, remove it for camera-ready (see 5.1)
+
+$if(tables)$
+\usepackage{longtable,booktabs}
+$if(beamer)$
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+$else$
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+$endif$
+$endif$
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{$bibliography$}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%%% The following is specific to <Programming'20> Companion-CCS and the paper
+%%% 'Wildcard: Spreadsheet-Driven Customization of Web Applications'
+%%% by Geoffrey Litt and Daniel Jackson.
+%%%
+%%% (Author note: Commented out this info, doesn't seem to fit with this template)
+% \setcopyright{acmlicensed}
+% \acmPrice{}
+% \acmDOI{10.1145/3397537.3397541}
+% \acmYear{2020}
+% \copyrightyear{2020}
+% \acmSubmissionID{prog20ccs-id3-p}
+% \acmISBN{978-1-4503-7507-8/20/03}
+% \acmConference[<Programming'20> Companion]{Companion Proceedings of the 4th International Conference on the Art, Science, and Engineering of Programming}{March 23--26, 2020}{Porto, Portugal}
+% \acmBooktitle{Companion Proceedings of the 4th International Conference on the Art, Science, and Engineering of Programming (<Programming'20> Companion), March 23--26, 2020, Porto, Portugal}
+
+
+\begin{document}
+
+\title{$title$}
+\subtitle{$subtitle$}% optional
+
+\author{Geoffrey Litt}
+\authorinfo{is a PhD student at MIT in the Software Design Group. His research focuses on programming languages and environments, particularly tools for end user programming and live programming. Contact him at \email{glitt@mit.edu}.}
+\author{Daniel Jackson}
+\authorinfo{is Professor in the Department of Electrical Engineering and Computer Science at MIT,  a MacVicar teaching fellow, and Associate Director of the Computer Science and Artificial Intelligence Laboratory. He leads the Software Design Group. Contact him at \email{dnj@csail.mit.edu}.}
+\affiliation{Massachusetts Institute of Technology}
+
+\keywords{end-user programming, software customization, web browser extensions, programming-by-demonstration, web scraping} % please provide 1--5 keywords
+
+
+%%%%%%%%%%%%%%%%%%
+%% These data MUST be filled for your submission. (see 5.3)
+\paperdetails{
+  %% perspective options are: art, sciencetheoretical, scienceempirical, engineering.
+  %% Choose exactly the one that best describes this work. (see 2.1)
+  perspective=art,
+  %% State one or more areas, separated by a comma. (see 2.2)
+  %% Please see list of areas in http://programming-journal.org/cfp/
+  %% The list is open-ended, so use other areas if yours is/are not listed.
+  area={Programming environments, Visual and live programming},
+  %% You may choose the license for your paper (see 3.)
+  %% License options include: cc-by (default), cc-by-nc
+  % license=cc-by-sa,
+}
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+%% These data are provided by the editors. May be left out on submission.
+%\paperdetails{
+%  submitted=2016-08-10,
+%  published=2016-10-11,
+%  year=2016,
+%  volume=1,
+%  issue=1,
+%  articlenumber=1,
+%}
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please go to https://dl.acm.org/ccs/ccs.cfm and generate your Classification
+% System [view CCS TeX Code] stanz and copy _all of it_ to this place.
+%% From HERE
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10011007.10011006.10011066.10011069</concept_id>
+<concept_desc>Software and its engineering~Integrated and visual development environments</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software and its engineering~Integrated and visual development environments}
+% To HERE
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\maketitle
+
+% Please always include the abstract.
+% The abstract MUST be written according to the directives stated in
+% http://programming-journal.org/submission/
+% Failure to adhere to the abstract directives may result in the paper
+% being returned to the authors.
+\begin{abstract}
+$abstract$
+
+This paper is best viewed in the online version (\url{https://www.geoffreylitt.com/wildcard/salon2020}), which includes videos demonstrating the interface.
+\end{abstract}
+
+
+$body$
+
+\acks
+Thanks to Tarfah Alrashed, Glen Chiacchieri, David Karger, Steve Krouse, Rob Miller, Santiago Perez De Rosso, Arvind Satyanarayan, Daniel Windham, and Maggie Yellen for providing valuable feedback on this work.
+
+\printbibliography
+
+\end{document}
+
+% Local Variables:
+% TeX-engine: luatex
+% End:

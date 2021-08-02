@@ -1,0 +1,81 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references-bibtex.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty year in huynh2006
+Warning--empty year in lin2009
+Warning--empty year in litt2020
+Warning--empty journal in shipman1999
+Warning--empty year in shipman1999
+Warning--empty year in blackwell2001
+Warning--empty journal in kushmerick2000
+Warning--empty year in kushmerick2000
+Warning--empty year in bakke2016
+Warning--empty year in chang2014
+Warning--empty year in furche2016
+Warning--empty journal in satyanarayan2014
+Warning--empty year in satyanarayan2014
+Warning--empty year in satyanarayan2014a
+Warning--empty year in ledo2018
+Warning--empty year in chasins2018
+Warning--empty year in mayer2015
+Warning--empty year in le2014
+Warning--empty journal in harris
+Warning--empty year in harris
+Warning--empty year in peleg2018
+Warning--empty year in chugh2016a
+Warning--empty year in chugh2016
+Warning--empty year in hogue2005
+
+Done.
+You've used 26 entries,
+            4087 wiz_defined-function locations,
+            960 strings with 13211 characters,
+and the built_in function-call counts, 19887 in all, are:
+= -- 1527
+> -- 463
+< -- 156
++ -- 255
+- -- 77
+* -- 966
+:= -- 2940
+add.period$ -- 63
+call.type$ -- 26
+change.case$ -- 28
+chr.to.int$ -- 390
+cite$ -- 50
+duplicate$ -- 1392
+empty$ -- 1666
+format.name$ -- 96
+if$ -- 4609
+int.to.chr$ -- 0
+int.to.str$ -- 26
+missing$ -- 253
+newline$ -- 149
+num.names$ -- 22
+pop$ -- 696
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1517
+stack$ -- 0
+substring$ -- 942
+swap$ -- 1068
+text.length$ -- 26
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 26
+warning$ -- 24
+while$ -- 92
+width$ -- 28
+write$ -- 306
+(There were 24 warnings)
