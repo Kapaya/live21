@@ -121,18 +121,6 @@ When users demonstrate a specific column value to extract, Joker must synthesize
 We evaluate our interaction model and tool by describing the results of our use of Joker to extract data and perform customizations on popular websites. For the websites on which Joker can be used, we provide the sequence of interactions needed to achieve the customizations; for the websites on which Joker fails, we explain the relevant limitations.
 
 ## Successful Applications
-<!-- <div class="pdf-only">
-```{=latex}
-\begin{table}
-\hypertarget{tab:examples}{%
-\centering
-\includegraphics[width=\columnwidth]{media/examples_table.png}
-\caption{A gallery of website customizations that we have achieved using Joker. End users can perform these customizations without writing any JavaScript.}\label{tab:examples}
-}
-\vspace{-0.9cm}
-\end{table}
-```
-</div> -->
 
 We have used Joker to achieve a variety of customizations across many websites. Table 1 summarizes examples we have found on popular websites.
 
