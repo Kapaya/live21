@@ -179,6 +179,130 @@ $body$
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references-bibtex.bib}
 
+\clearpage
+\hypertarget{appendix}{%
+\section*{Appendix}\label{appendix}}
+
+\hypertarget{appendix-a}{%
+\subsection*{A: Extraction Formulas}\label{appendix-a}}
+
+Joker adds DOM elements as a data type to Wildcard's formula language, alongside strings,
+numbers, and booleans. Because the language runs in a JavaScript
+interpreter, we simply use native JavaScript values to represent DOM
+elements in the language. DOM elements are displayed visually by showing
+their inner text contents. They can also be implicitly typecast to
+strings for use in other formulas; for example, a string manipulation
+formula like \texttt{Substring} can be called on a DOM element value,
+and will operate on its text contents.
+
+We also added several functions to the formula language for traversing
+the DOM and performing extractions, summarized below with their types:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{QuerySelector(el:\ Element,\ sel:\ string):\ Element}.
+  Executes the CSS selector \texttt{sel} inside of element \texttt{el},
+  and returns the first matching element.
+\item
+  \texttt{GetAttribute(el:\ Element,\ attribute:\ string):\ string}.
+  Returns the value for an attribute on an element.
+\item
+  \texttt{GetParent(el:\ Element):\ Element}. Returns the parent of a
+  given element.
+\end{itemize}
+
+To extract data from a row, formulas need a way to reference the current
+row, so we added a construct to support this use case. Every row in the
+table maps to one DOM element in the page; we allow formulas to access
+this DOM element via a special keyword, \texttt{rowElement}. In some
+sense, \texttt{rowElement} can be seen as a hidden extra column of data
+in the table containing DOM elements.
+
+While many more functions could be added to expose more of the
+underlying DOM API, we found that in practice these three functions
+provided ample power through composition. For example, in
+Section~\ref{sec:examples} we showed how \texttt{GetParent} and
+\texttt{GetAttribute} can be composed to traverse the DOM and extract
+the URL associated with a product listing.
+
+\hypertarget{appendix-b}{%
+\subsection*{B: Wrapper Induction Algorithm}\label{appendix-b}}
+
+Our wrapper induction algorithm implements a set of heuristics inspired by Vegemite
+as described below:
+
+\hypertarget{determining-row-elements}{%
+\subsubsection*{Determining Row
+Elements}\label{determining-row-elements}}
+
+The user starts by demonstrating an element \(v\), representing a value
+that should be in the table. From that demonstration, we must find a set
+of \emph{row elements} that represent the rows of the table. We could
+naively assume that \(parent(v)\) is the row containing \(v\), but often
+\(v\) is deeply nested inside its containing row; we must determine
+which ancestor of \(v\) is likely to be the row.
+
+Intuitively, we solve this problem by assuming that all rows share some
+similar internal structure. In particular, we expect most rows to
+contain a value for the demonstrated column. (If there were no missing
+data, we'd expect \emph{all} rows to contain data for this column.)
+
+Formally: assume a function \(select(el, s)\) which runs a CSS selector
+that returns the set of elements matching \(s\) within \(el\). We
+generate a set of plausible candidates \(P\), consisting of pairs of a
+row element and a CSS selector:
+
+\(P = \{ (r, s) \mid r \in ancestors(v) \land select(r, s) = \{v\} \}\)
+
+For each candidate \((r, s) \in P\), we compute a weight function \(w\),
+which is based on the number of siblings of \(r\) that have ``similar
+structure'', defined by checking whether running \(s\) within the
+sibling also returns a unique element.
+
+\(w(r, s) = |\{ r' \mid r' \in siblings(r) \land |select(r', s) | = 1 \}|\)
+
+We then choose the candidate with the highest weight. In case of ties,
+the candidate closer to \(v\) in the tree (i.e., lower in the tree)
+wins. Given a winning candidate \((r, s)\), the full set of row elements
+is \(\{r\} \cup siblings(r)\).
+
+\hypertarget{synthesizing-css-selectors-for-column-values}{%
+\subsubsection*{Synthesizing CSS Selectors For Column
+Values}\label{synthesizing-css-selectors-for-column-values}}
+
+Once we have determined the row elements, next we must choose a CSS
+selector that will be used to identify the demonstrated value within its
+row.
+
+Given a demonstrated value \(v\) within a row element \(r\), we generate
+two kinds of plausible selectors:
+
+\begin{itemize}
+\tightlist
+\item
+  selectors using CSS classes, which are manual annotations on DOM
+  elements added by the website's programmers, typically for styling
+  purposes (e.g.~"item\_\_price")
+\item
+  selectors using positional indexes within the tree, using the
+  \texttt{nth-child} CSS selector (e.g.~\texttt{nth-child(2)},
+  representing the second child of an element)
+\end{itemize}
+
+The minimum criteria for a plausible selector \(s\) is that it uniquely
+identifies the value within the row: \(select(r, s) = \{v\}\). But there
+may be many plausible selectors, so we must pick a best one.
+
+We first prioritize selectors using classes, because they tend to be
+more robust to changes on the website. A single selector can combine
+multiple classes, but we prefer using fewer classes when possible. If no
+plausible class-based selector can be generated (for example, if the
+relevant elements don't have any classes to query), we fall back to
+using a positional index selector. This kind of selector can always be
+generated regardless of the contents of the page, but tends to be less
+accurate and robust.
+
 \end{document}
 \endinput
 %%
