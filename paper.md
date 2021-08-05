@@ -159,7 +159,7 @@ Mayer et al propose a user interaction model called *Program Navigation* [@mayer
 
 # Conclusion And Future Work {#sec:conclusion}
 
-In this paper, we presented a unified interaction model for web customization. Our key idea is a spreadsheet formula language that encompasses both extraction and augmentation tasks, along with a programming-by-demonstration (PBD) interface that makes it easy for end-users to program to create formulas. The main area of future work involves making the formula language more accessible to end-users not familiar with CSS selectors. Our ultimate goal is to enable anyone that uses the web to customize websites in the course of their daily use in an intuitive and flexible way.
+In this paper, we presented a unified interaction model for web customization. Our key idea is a spreadsheet formula language that encompasses both extraction and augmentation tasks, along with a programming-by-demonstration (PBD) interface that makes it easy for end-users to create formulas. The main area of future work involves testing with more users and making the formula language more accessible to end-users not familiar with CSS selectors. Our ultimate goal is to enable anyone that uses the web to customize websites in the course of their daily use in an intuitive and flexible way.
 
 <!-- Add a new page so that the references start on the next page; -->
 <!-- we can drop this if needed -->
