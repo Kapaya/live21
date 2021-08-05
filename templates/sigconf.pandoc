@@ -232,7 +232,7 @@ the URL associated with a product listing.
 \hypertarget{appendix-b}{%
 \subsection*{B: Wrapper Induction Algorithm}\label{appendix-b}}
 
-Our wrapper induction algorithm implements a set of heuristics inspired by Vegemite
+Joker's wrapper induction algorithm implements a set of heuristics inspired by Vegemite
 as described below:
 
 \hypertarget{determining-row-elements}{%

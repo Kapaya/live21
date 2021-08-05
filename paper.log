@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  5 AUG 2021 09:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  5 AUG 2021 11:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -799,32 +799,35 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 20.74pt on input line 194.
+(Font)              scaled to size 20.74pt on input line 193.
 LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-TLF o
-n input line 194.
+n input line 193.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/libertine/T1LinuxBiolinumT-TLF.fd
 File: T1LinuxBiolinumT-TLF.fd 2017/03/20 (autoinst) Font definitions for T1/Lin
 uxBiolinumT-TLF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 20.74pt on input line 194.
+(Font)              scaled to size 20.74pt on input line 193.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxBiolinumT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
-(Font)              scaled to size 20.74pt on input line 194.
+(Font)              scaled to size 20.74pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 194.
+(Font)              scaled to size 14.4pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 194.
+(Font)              scaled to size 10.95pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 194.
+(Font)              scaled to size 10.0pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 194.
+(Font)              scaled to size 12.0pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 212.
+(Font)              scaled to size 10.0pt on input line 211.
+
+Underfull \vbox (badness 1360) has occurred while \output is active []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -834,50 +837,50 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <media/ebay.png, id=92, 552.1428pt x 764.6166pt>
 File: media/ebay.png Graphic file (type png)
 <use media/ebay.png>
-Package pdftex.def Info: media/ebay.png  used on input line 270.
+Package pdftex.def Info: media/ebay.png  used on input line 269.
 (pdftex.def)             Requested size: 506.295pt x 701.1457pt.
 
-Class acmart Warning: A possible image without description on input line 272.
+Class acmart Warning: A possible image without description on input line 271.
 
 
-LaTeX Warning: Float too large for page by 103.1457pt on input line 272.
+LaTeX Warning: Float too large for page by 103.1457pt on input line 271.
 
 <media/overview.png, id=101, 920.43875pt x 257.96375pt>
 File: media/overview.png Graphic file (type png)
 <use media/overview.png>
-Package pdftex.def Info: media/overview.png  used on input line 323.
+Package pdftex.def Info: media/overview.png  used on input line 322.
 (pdftex.def)             Requested size: 506.295pt x 141.89622pt.
 
-Class acmart Warning: A possible image without description on input line 325.
+Class acmart Warning: A possible image without description on input line 324.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 391.
+(Font)              scaled to size 7.0pt on input line 390.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.391 ...ications}\label{successful-applications}}
+l.390 ...ications}\label{successful-applications}}
                                                    [2.2]pdfTeX warning (ext4): 
 destination with the same identifier (name{page.}) has been already used, dupli
 cate ignored
 <to be read again> 
                    \relax 
-l.391 ...ications}\label{successful-applications}}
+l.390 ...ications}\label{successful-applications}}
                                                    [3.3 <./media/ebay.png>]
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 393.
+(Font)              scaled to size 10.0pt on input line 392.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 393.
+(Font)              scaled to size 10.0pt on input line 392.
 LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 40
-3.
+2.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 403.
+(Font)              scaled to size 10.0pt on input line 402.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zi4' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
@@ -886,13 +889,13 @@ Package microtype Info: Loading generic protrusion settings for font family
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 451.
+(Font)              scaled to size 10.0pt on input line 450.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 451.
+(Font)              scaled to size 7.3pt on input line 450.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -901,7 +904,7 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.470 \end{itemize}
+l.469 \end{itemize}
                     [4.4 <./media/overview.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -909,7 +912,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.577 
+l.576 
        [5.5]
 Underfull \vbox (badness 1558) has occurred while \output is active []
 
@@ -917,7 +920,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.678 \newpage
+l.677 \newpage
                [6.6] (./paper.bbl
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 44.
@@ -961,15 +964,15 @@ LaTeX Info: Redefining \tempurl on input line 379.
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.688 \clearpage
+l.687 \clearpage
                  [7.7]
-Overfull \hbox (17.28821pt too wide) in paragraph at lines 710--714
+Overfull \hbox (17.28821pt too wide) in paragraph at lines 709--713
 []\T1/zi4/m/n/10 QuerySelector(el: Element, sel: string): Element\T1/LinuxLiber
 tineT-TLF/m/n/10 (-20) .
  []
 
 
-Overfull \hbox (18.01869pt too wide) in paragraph at lines 790--794
+Overfull \hbox (18.01869pt too wide) in paragraph at lines 789--793
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) gram-mers, typ-i-cally for styling pur-pos
 es (e.g. "item__price") 
  []
@@ -995,15 +998,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.812 \end{document}
+l.811 \end{document}
                      [8.8
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 812.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 812.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 811.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 811.
 (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 812.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 812.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 811.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 811.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: F398442F2B5FCD156500AC6790539E00;2203.
  ) 
@@ -1032,7 +1035,7 @@ e/LinLibertineTB.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lib
 ertine/LinLibertineTI.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/publi
 c/newtx/txmiaX.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/newtx
 /txsys.pfb>
-Output written on paper.pdf (8 pages, 1861822 bytes).
+Output written on paper.pdf (8 pages, 1861740 bytes).
 PDF statistics:
  304 PDF objects out of 1000 (max. 8388607)
  264 compressed objects within 3 object streams
