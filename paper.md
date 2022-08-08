@@ -161,6 +161,10 @@ Mayer et al propose a user interaction model called *Program Navigation* [@mayer
 
 In this paper, we presented a unified interaction model for web customization. Our key idea is a spreadsheet formula language that encompasses both extraction and augmentation tasks, along with a programming-by-demonstration (PBD) interface that makes it easy for end-users to create formulas. The main area of future work involves testing with more users and making the formula language more accessible to end-users not familiar with CSS selectors. Our ultimate goal is to enable anyone that uses the web to customize websites in the course of their daily use in an intuitive and flexible way.
 
+# Acknowledgments {#sec:acknowledgments}
+
+Thank you to Joshua Pollock, the members of MIT’s Software Design Group, the anonymous reviewers of LIVE 2021 and the particpants of LIVE 2021 for providing valuable feedback on this work. This research was supported in part by the SaTC Program of the National Science Foundation.
+
 <!-- Add a new page so that the references start on the next page; -->
 <!-- we can drop this if needed -->
 \newpage

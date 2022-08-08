@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  5 AUG 2021 11:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  7 AUG 2022 21:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -819,22 +819,35 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 14.4pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 10.95pt on input line 193.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 10.95pt on input line 193.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.1pt on input line 193.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 193.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 193.
+
+Underfull \vbox (badness 2088) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 211.
-
-Underfull \vbox (badness 1360) has occurred while \output is active []
-
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [1.1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-<media/ebay.png, id=92, 552.1428pt x 764.6166pt>
+<media/ebay.png, id=96, 552.1428pt x 764.6166pt>
 File: media/ebay.png Graphic file (type png)
 <use media/ebay.png>
 Package pdftex.def Info: media/ebay.png  used on input line 269.
@@ -845,7 +858,10 @@ Class acmart Warning: A possible image without description on input line 271.
 
 LaTeX Warning: Float too large for page by 103.1457pt on input line 271.
 
-<media/overview.png, id=101, 920.43875pt x 257.96375pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+<media/overview.png, id=105, 920.43875pt x 257.96375pt>
 File: media/overview.png Graphic file (type png)
 <use media/overview.png>
 Package pdftex.def Info: media/overview.png  used on input line 322.
@@ -857,19 +873,18 @@ Class acmart Warning: A possible image without description on input line 324.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 390.
+(Font)              scaled to size 7.0pt on input line 369.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.390 ...ications}\label{successful-applications}}
-                                                   [2.2]pdfTeX warning (ext4): 
-destination with the same identifier (name{page.}) has been already used, dupli
-cate ignored
+l.369 
+       [2.2]pdfTeX warning (ext4): destination with the same identifier (name{p
+age.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.390 ...ications}\label{successful-applications}}
-                                                   [3.3 <./media/ebay.png>]
+l.369 
+       [3.3 <./media/ebay.png>]
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 392.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
@@ -888,40 +903,43 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 450.
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 450.
-(/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)pdfTeX warning (ext4): destination with the same identifier (name{page.}) has 
-been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.469 \end{itemize}
-                    [4.4 <./media/overview.png>]
+l.439 
+       [4.4 <./media/overview.png>]
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 450.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 7.3pt on input line 450.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.576 
+l.556 
        [5.5]
 Underfull \vbox (badness 1558) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.677 \newpage
-               [6.6] (./paper.bbl
+l.663 
+       [6.6]pdfTeX warning (ext4): destination with the same identifier (name{p
+age.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.688 \clearpage
+                 [7.7
+
+] (./paper.bbl
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 44.
 LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-TLF
@@ -964,15 +982,17 @@ LaTeX Info: Redefining \tempurl on input line 379.
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.687 \clearpage
-                 [7.7]
-Overfull \hbox (17.28821pt too wide) in paragraph at lines 709--713
+l.698 \clearpage
+                 [8.8
+
+]
+Overfull \hbox (17.28821pt too wide) in paragraph at lines 720--724
 []\T1/zi4/m/n/10 QuerySelector(el: Element, sel: string): Element\T1/LinuxLiber
 tineT-TLF/m/n/10 (-20) .
  []
 
 
-Overfull \hbox (18.01869pt too wide) in paragraph at lines 789--793
+Overfull \hbox (18.01869pt too wide) in paragraph at lines 800--804
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) gram-mers, typ-i-cally for styling pur-pos
 es (e.g. "item__price") 
  []
@@ -998,33 +1018,33 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.811 \end{document}
-                     [8.8
+l.822 \end{document}
+                     [9.9
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 811.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 811.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 822.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 822.
 (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 811.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 811.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 822.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 822.
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: F398442F2B5FCD156500AC6790539E00;2203.
+(rerunfilecheck)             Checksum: 8142F7552410E0FA796DD4A2CBE8EBFC;2335.
  ) 
 Here is how much of TeX's memory you used:
- 18807 strings out of 480608
- 284463 string characters out of 5903631
- 576593 words of memory out of 5000000
- 33761 multiletter control sequences out of 15000+600000
- 665122 words of font info for 318 fonts, out of 8000000 for 9000
+ 18865 strings out of 480608
+ 285771 string characters out of 5903631
+ 576630 words of memory out of 5000000
+ 33803 multiletter control sequences out of 15000+600000
+ 676181 words of font info for 344 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 63i,11n,100p,796b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,12n,100p,796b,516s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc
 }{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_u7qtuy.enc}
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-4.enc}{/u
 sr/local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{/us
 r/local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{/usr
-/local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}{/usr/
-local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}</usr/l
+/local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{/usr/
+local/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}</usr/l
 ocal/texlive/2020/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pf
 b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.
 pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinu
@@ -1035,10 +1055,10 @@ e/LinLibertineTB.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lib
 ertine/LinLibertineTI.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/publi
 c/newtx/txmiaX.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/newtx
 /txsys.pfb>
-Output written on paper.pdf (8 pages, 1861740 bytes).
+Output written on paper.pdf (9 pages, 1863658 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
- 264 compressed objects within 3 object streams
- 74 named destinations out of 1000 (max. 500000)
- 36999 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 312 PDF objects out of 1000 (max. 8388607)
+ 271 compressed objects within 3 object streams
+ 76 named destinations out of 1000 (max. 500000)
+ 41615 words of extra memory for PDF output out of 42996 (max. 10000000)
 

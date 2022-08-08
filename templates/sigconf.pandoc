@@ -85,37 +85,37 @@ $endif$
 %% "authornote" and "authornotemark" commands
 %% used to denote shared contribution to the research.
 
-%\author{Kapaya Katongo}
-%\affiliation{%
-%  \institution{MIT CSAIL}
-%  \city{Cambridge, MA}
-%  \country{USA}
-%}
-%\email{kkatongo@mit.edu}
+\author{Kapaya Katongo}
+\affiliation{%
+  \institution{MIT CSAIL}
+  \city{Cambridge, MA}
+  \country{USA}
+}
+\email{kapaya@alum.mit.edu}
 
-%\author{Geoffrey Litt}
-%\affiliation{%
-%  \institution{MIT CSAIL}
-%  \city{Cambridge, MA}
-%  \country{USA}
-%}
-%\email{glitt@mit.edu}
+\author{Geoffrey Litt}
+\affiliation{%
+  \institution{MIT CSAIL}
+  \city{Cambridge, MA}
+  \country{USA}
+}
+\email{glitt@mit.edu}
 
-%\author{Kathryn Jin}
-%\affiliation{%
-%  \institution{MIT CSAIL}
-%  \city{Cambridge, MA}
-%  \country{USA}
-%}
-%\email{kjin@mit.edu}
+\author{Kathryn Jin}
+\affiliation{%
+  \institution{MIT CSAIL}
+  \city{Cambridge, MA}
+  \country{USA}
+}
+\email{kjin@mit.edu}
 
-%\author{Daniel Jackson}
-%\affiliation{%
-% \institution{MIT CSAIL}
-%  \city{Cambridge, MA}
-%  \country{USA}
-%}
-%\email{dnj@csail.mit.edu}
+\author{Daniel Jackson}
+\affiliation{%
+ \institution{MIT CSAIL}
+  \city{Cambridge, MA}
+  \country{USA}
+}
+\email{dnj@csail.mit.edu}
 
 %%
 %% By default, the full list of authors will be used in the page
@@ -173,6 +173,8 @@ $endif$
 \pagestyle{plain}
 
 $body$
+
+\clearpage
 
 % \printbibliography
 
